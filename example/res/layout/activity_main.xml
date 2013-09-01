@@ -1,0 +1,77 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res/com.kk.clickmaskimageviewdemo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadingEdge="none"
+    android:id="@+id/root"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_height="wrap_content"
+            android:text="ClickMaskRoundCornerImageView" />
+
+        <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            app:radius="10dp"
+            android:tag="imageView"
+            android:src="@drawable/pic1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_height="wrap_content"
+            android:text="ClickMaskRoundCornerImageView with background" />
+
+        <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
+            android:layout_width="270dp"
+            android:tag="imageView"
+            android:layout_margin="12dp"
+            android:layout_height="135dp"
+            app:background="#cccccc"
+            app:radiusy="15dp"
+            app:radiusx="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_height="wrap_content"
+            android:text="ClickMaskImageView with background" />
+
+        <com.kk.clickmaskimageview.ClickMaskImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:tag="imageView"
+            android:background="#cccccc"
+            android:src="@drawable/pic1"
+            android:layout_margin="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_height="wrap_content"
+            android:text="RoundCornerImageView" />
+
+        <com.kk.clickmaskimageview.RoundCornerImageView
+            android:layout_height="wrap_content"
+            android:tag="imageView"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/pic1"
+            app:radiusx="150dp"
+            app:radiusy="150dp"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+</ScrollView>

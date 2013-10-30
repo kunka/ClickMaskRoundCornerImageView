@@ -12,6 +12,7 @@ import android.widget.ImageView;
  */
 public class ClickMaskImageView extends ImageView {
     private OnClickListener onClickListener;
+    private boolean isPressed = false;
 
     public ClickMaskImageView(Context context) {
         super(context);
@@ -43,5 +44,31 @@ public class ClickMaskImageView extends ImageView {
                     onClickListener.onClick(view);
             }
         });
+
+        CustomOnClickListener customOnClickListener = new CustomOnClickListener(this);
+        setOnTouchListener(customOnClickListener);
+        customOnClickListener.setOnPressListener(new CustomOnClickListener.OnPressListener() {
+            @Override
+            public void onPress(View v, boolean press) {
+                setPressedEffect(press);
+            }
+        });
+        customOnClickListener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  }
+        });
     }
+
+    private void setPressedEffect(boolean pressed) {
+//        if (isPressed != pressed) {
+//            Log.d(TAG, "setPressedEffect " + pressed);
+//            isPressed = pressed;
+//            if (isPressed)
+//                mImageView.setColorFilter(new PorterDuffColorFilter(MASK_COLOR, PorterDuff.Mode.SRC_ATOP));
+//            else
+//                mImageView.setColorFilter(null);
+//        }
+    }
+
 }

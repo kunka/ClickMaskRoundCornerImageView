@@ -3,7 +3,7 @@
     <declare-styleable name="RoundCornerImageView">
         <attr name="radiusx" format="dimension" />
         <attr name="radiusy" format="dimension" />
-        <attr name="radius" format="dimension" />
+        <attr name="radiusxy" format="dimension" />
         <attr name="background" format="color" />
     </declare-styleable>
 

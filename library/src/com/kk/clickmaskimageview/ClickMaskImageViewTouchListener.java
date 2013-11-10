@@ -13,6 +13,7 @@ import android.widget.ImageView;
  * <p/>
  * Created by xj on 13-8-27.
  */
+@Deprecated
 public class ClickMaskImageViewTouchListener implements View.OnTouchListener {
     private static final String TAG = "ClickMaskImageView";
     //overlay is black with transparency of 0x77 (119)

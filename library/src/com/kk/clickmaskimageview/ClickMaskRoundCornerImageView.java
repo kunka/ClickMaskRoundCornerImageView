@@ -1,7 +1,10 @@
 package com.kk.clickmaskimageview;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -10,7 +13,10 @@ import android.view.View;
  * Created by xj on 13-8-26.
  */
 public class ClickMaskRoundCornerImageView extends RoundCornerImageView {
-    private View.OnClickListener onClickListener;
+    private static final String TAG = "ClickMaskImageView";
+    private OnClickListener onClickListener;
+    private boolean isPressed = false;
+    private static final int MASK_COLOR = 0x77000000;
 
     public ClickMaskRoundCornerImageView(Context context) {
         super(context);
@@ -33,14 +39,31 @@ public class ClickMaskRoundCornerImageView extends RoundCornerImageView {
     }
 
     private void init() {
-        ClickMaskImageViewTouchListener clickMaskImageViewTouchListener = new ClickMaskImageViewTouchListener(this);
-        setOnTouchListener(clickMaskImageViewTouchListener);
-        clickMaskImageViewTouchListener.setOnClickListener(new View.OnClickListener() {
+        CustomOnClickListener customOnClickListener = new CustomOnClickListener(this);
+        setOnTouchListener(customOnClickListener);
+        customOnClickListener.setOnPressListener(new CustomOnClickListener.OnPressListener() {
             @Override
-            public void onClick(View view) {
-                if (onClickListener != null)
-                    onClickListener.onClick(view);
+            public void onPress(View v, boolean press) {
+                setPressedEffect(press);
             }
         });
+        customOnClickListener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null)
+                    onClickListener.onClick(v);
+            }
+        });
+    }
+
+    private void setPressedEffect(boolean pressed) {
+        if (isPressed != pressed) {
+            Log.d(TAG, "setPressedEffect " + pressed);
+            isPressed = pressed;
+            if (isPressed)
+                setColorFilter(new PorterDuffColorFilter(MASK_COLOR, PorterDuff.Mode.SRC_ATOP));
+            else
+                setColorFilter(null);
+        }
     }
 }

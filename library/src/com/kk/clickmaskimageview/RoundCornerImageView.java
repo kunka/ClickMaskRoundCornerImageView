@@ -38,6 +38,7 @@ public class RoundCornerImageView extends ImageView {
 
     public RoundCornerImageView(Context context) {
         super(context);
+        init(null);
     }
 
     public RoundCornerImageView(Context context, AttributeSet attrs) {
@@ -56,7 +57,7 @@ public class RoundCornerImageView extends ImageView {
             mBackgroundColor = a.getColor(R.styleable.RoundCornerImageView_background, 0);
             mRadiusX = a.getDimension(R.styleable.RoundCornerImageView_radiusx, sDefaultRadiusX);
             mRadiusY = a.getDimension(R.styleable.RoundCornerImageView_radiusy, sDefaultRadiusY);
-            float radius = a.getDimension(R.styleable.RoundCornerImageView_radius, -1);
+            float radius = a.getDimension(R.styleable.RoundCornerImageView_radiusxy, -1);
             if (radius != -1) {
                 mRadiusX = mRadiusY = radius;
             }

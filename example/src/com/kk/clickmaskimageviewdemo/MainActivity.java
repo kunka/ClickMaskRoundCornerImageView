@@ -2,10 +2,13 @@ package com.kk.clickmaskimageviewdemo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.kk.clickmaskimageview.RatioImageView;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,15 @@ public class MainActivity extends Activity {
                     Toast.makeText(MainActivity.this, view.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
                 }
             });
+            if (imageView instanceof RatioImageView) {
+                RatioImageView ratioImageView = (RatioImageView) imageView;
+                ratioImageView.setOnSizeChangedListener(new RatioImageView.OnSizeChangedListener() {
+                    @Override
+                    public void onSizeChanged(RatioImageView ratioImageView, int w, int h, int oldw, int oldh) {
+                        Log.d("RatioImageView", "RatioImageView(" + ratioImageView + ") ratio = " + ratioImageView.getAspectRatio() + " onSizeChanged w = " + w + " h = " + h + " oldw = " + oldw + " oldh = " + oldh);
+                    }
+                });
+            }
         }
     }
 

@@ -6,5 +6,8 @@
         <attr name="radiusxy" format="dimension" />
         <attr name="background" format="color" />
     </declare-styleable>
+    <declare-styleable name="RatioImageView">
+        <attr name="aspectRatio" format="float" />
+    </declare-styleable>
 
 </resources>

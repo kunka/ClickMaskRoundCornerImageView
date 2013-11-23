@@ -26,11 +26,11 @@ import android.widget.ImageView;
  * Created by xj on 13-8-26.
  */
 public class RoundCornerImageView extends ImageView {
-    private static final float sDefaultRadiusX = 5f;
-    private static final float sDefaultRadiusY = 5f;
+    private static final float DEFAULT_RADIUS_X = 5f;
+    private static final float DEFAULT_RADIUS_Y = 5f;
 
-    private float mRadiusX = sDefaultRadiusX;
-    private float mRadiusY = sDefaultRadiusY;
+    private float mRadiusX = DEFAULT_RADIUS_X;
+    private float mRadiusY = DEFAULT_RADIUS_Y;
     protected Paint mBitmapPaint;
     protected Paint mBackgroundColorPaint;
     BitmapShader mBitmapShader;
@@ -55,8 +55,8 @@ public class RoundCornerImageView extends ImageView {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RoundCornerImageView);
             mBackgroundColor = a.getColor(R.styleable.RoundCornerImageView_background, 0);
-            mRadiusX = a.getDimension(R.styleable.RoundCornerImageView_radiusx, sDefaultRadiusX);
-            mRadiusY = a.getDimension(R.styleable.RoundCornerImageView_radiusy, sDefaultRadiusY);
+            mRadiusX = a.getDimension(R.styleable.RoundCornerImageView_radiusx, DEFAULT_RADIUS_X);
+            mRadiusY = a.getDimension(R.styleable.RoundCornerImageView_radiusy, DEFAULT_RADIUS_Y);
             float radius = a.getDimension(R.styleable.RoundCornerImageView_radiusxy, -1);
             if (radius != -1) {
                 mRadiusX = mRadiusY = radius;

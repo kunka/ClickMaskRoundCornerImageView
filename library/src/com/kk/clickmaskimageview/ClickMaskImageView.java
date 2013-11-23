@@ -15,9 +15,9 @@ import android.widget.ImageView;
  */
 public class ClickMaskImageView extends ImageView {
     private static final String TAG = "ClickMaskImageView";
+    private static final int MASK_COLOR = 0x77000000;
     private OnClickListener onClickListener;
     private boolean isPressed = false;
-    private static final int MASK_COLOR = 0x77000000;
 
     public ClickMaskImageView(Context context) {
         super(context);

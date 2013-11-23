@@ -1,112 +1,291 @@
-<LinearLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:attr="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="12dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:id="@+id/root"
+    android:background="#CCC"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_height="wrap_content"
-        android:text="ClickMaskRoundCornerImageView" />
-
-    <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_width="wrap_content"
-        app:radius="10dp"
-        android:tag="imageView"
-        android:src="@drawable/pic1" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#333333" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
-        android:text="In ScrollView" />
-
-
-    <ScrollView xmlns:tools="http://schemas.android.com/tools"
-        android:fadingEdge="none"
-        android:id="@+id/root"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:fitsSystemWindows="true">
 
         <LinearLayout
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_height="wrap_content"
-                android:text="ClickMaskRoundCornerImageView" />
+                android:paddingLeft="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@color/COLOR_C"
+                android:text="RatioImageView(g500x200.jpeg,aspectRatio=0.4)"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/COLOR_A"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
-            <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:layout_width="wrap_content"
-                app:radius="10dp"
+            <com.kk.clickmaskimageview.RatioImageView
+                android:layout_width="fill_parent"
+                android:layout_margin="4dp"
+                attr:aspectRatio="0.4"
                 android:tag="imageView"
-                android:src="@drawable/pic1" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/g500x200" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_height="wrap_content"
-                android:text="ClickMaskImageView" />
+                android:paddingLeft="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@color/COLOR_C"
+                android:text="ClickMaskRatioImageView(i270x129.jpeg,aspectRatio=0.478)"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/COLOR_A"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
-            <com.kk.clickmaskimageview.ClickMaskImageView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:tag="imageView"
-                android:src="@drawable/pic1"
-                android:layout_margin="12dp" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <com.kk.clickmaskimageview.ClickMaskRatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="0.478"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:tag="imageView"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/b270x129" />
+
+                <com.kk.clickmaskimageview.ClickMaskRatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="0.478"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:tag="imageView"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/b270x129" />
+            </LinearLayout>
+
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_height="wrap_content"
-                android:text="RoundCornerImageView" />
+                android:paddingLeft="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@color/COLOR_C"
+                android:text="RatioImageView(g110x110.jpeg,aspectRatio=1)"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/COLOR_A"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
-            <com.kk.clickmaskimageview.RoundCornerImageView
-                android:layout_height="wrap_content"
-                android:tag="imageView"
-                android:layout_margin="12dp"
-                android:layout_width="wrap_content"
-                android:src="@drawable/pic1"
-                app:radiusx="150dp"
-                app:radiusy="150dp"
-                android:scaleType="centerCrop" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="1"
+                    android:layout_margin="4dp"
+                    android:tag="imageView"
+                    android:layout_weight="1"
+                    android:src="@drawable/g110x110"
+                    android:layout_height="wrap_content"
+                    android:background="#999999" />
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="1"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/g110x110"
+                    android:tag="imageView"
+                    android:layout_height="wrap_content"
+                    android:background="#999999" />
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="1"
+                    android:tag="imageView"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/g110x110"
+                    android:layout_height="wrap_content"
+                    android:background="#999999" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="1"
+                    android:layout_weight="1"
+                    android:tag="imageView"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/g110x110"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <com.kk.clickmaskimageview.RatioImageView
+                        android:layout_width="fill_parent"
+                        attr:aspectRatio="1"
+                        android:layout_margin="4dp"
+                        android:tag="imageView"
+                        android:src="@drawable/g110x110"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="#999999" />
+
+                    <com.kk.clickmaskimageview.RatioImageView
+                        android:layout_width="fill_parent"
+                        attr:aspectRatio="1"
+                        android:tag="imageView"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/g110x110"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="#999999" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@color/COLOR_C"
+                android:text="RatioImageView(white bg,aspectRatio= 0.5)"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/COLOR_A"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="0.5"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:background="#FFF"
+                    android:tag="imageView"
+                    android:layout_height="wrap_content" />
+
+                <com.kk.clickmaskimageview.RatioImageView
+                    android:layout_width="fill_parent"
+                    attr:aspectRatio="0.5"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:tag="imageView"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ClickMaskRoundCornerImageView with background" />
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:background="#CCC"
+                xmlns:attr="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
-                android:layout_width="270dp"
-                android:tag="imageView"
-                android:layout_margin="12dp"
-                android:layout_height="135dp"
-                app:background="#cccccc"
-                app:radiusy="15dp"
-                app:radiusx="15dp" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:layout_marginBottom="12dp"
+                    android:background="#333333" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:textColor="@color/COLOR_A"
+                        android:layout_height="wrap_content"
+                        android:text="ClickMaskRoundCornerImageView" />
+
+                    <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:layout_width="wrap_content"
+                        attr:radiusxy="10dp"
+                        android:tag="imageView"
+                        android:src="@drawable/pic1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/COLOR_A"
+                        android:layout_marginLeft="12dp"
+                        android:layout_height="wrap_content"
+                        android:text="ClickMaskImageView" />
+
+                    <com.kk.clickmaskimageview.ClickMaskImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:tag="imageView"
+                        android:src="@drawable/pic1"
+                        android:layout_margin="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/COLOR_A"
+                        android:layout_marginLeft="12dp"
+                        android:layout_height="wrap_content"
+                        android:text="RoundCornerImageView" />
+
+                    <com.kk.clickmaskimageview.RoundCornerImageView
+                        android:layout_height="wrap_content"
+                        android:tag="imageView"
+                        android:layout_margin="12dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/pic1"
+                        attr:radiusx="150dp"
+                        attr:radiusy="150dp"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:textColor="@color/COLOR_A"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_height="wrap_content"
+                        android:text="ClickMaskRoundCornerImageView with bg" />
+
+                    <com.kk.clickmaskimageview.ClickMaskRoundCornerImageView
+                        android:layout_width="270dp"
+                        android:tag="imageView"
+                        android:layout_margin="12dp"
+                        android:layout_height="135dp"
+                        attr:background="#FFF"
+                        attr:radiusy="15dp"
+                        attr:radiusx="15dp" />
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
-</LinearLayout>
+</FrameLayout>

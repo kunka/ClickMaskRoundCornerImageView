@@ -8,27 +8,25 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Override the onClickListener
- * <p/>
- * Created by xj on 13-8-26.
+ * Created by hk on 13-11-10.
  */
-public class ClickMaskRoundCornerImageView extends RoundCornerImageView {
+public class ClickMaskRatioImageView extends RatioImageView {
     private static final String TAG = "ClickMaskImageView";
     private static final int MASK_COLOR = 0x77000000;
-    private OnClickListener onClickListener;
+    private View.OnClickListener onClickListener;
     private boolean isPressed = false;
 
-    public ClickMaskRoundCornerImageView(Context context) {
+    public ClickMaskRatioImageView(Context context) {
         super(context);
         init();
     }
 
-    public ClickMaskRoundCornerImageView(Context context, AttributeSet attrs) {
+    public ClickMaskRatioImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ClickMaskRoundCornerImageView(Context context, AttributeSet attrs, int defStyle) {
+    public ClickMaskRatioImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }

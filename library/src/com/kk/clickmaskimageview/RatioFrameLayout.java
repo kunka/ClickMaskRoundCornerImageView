@@ -3,36 +3,38 @@ package com.kk.clickmaskimageview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 /**
  * Set aspectRatio before we got the real drawable(avoid layout jump).
  * you must set width with fill_parent or exact value, so the height = width * aspectRatio
  * Created by hk on 13-11-10.
  */
-public class RatioImageView extends ImageView {
+public class RatioFrameLayout extends FrameLayout {
     public interface OnSizeChangedListener {
         /**
          * Callback method to be invoked when the size be measured.
          */
-        public void onSizeChanged(RatioImageView ratioImageView, int w, int h, int oldw, int oldh);
+        public void onSizeChanged(RatioFrameLayout ratioImageView, int w, int h, int oldw, int oldh);
     }
 
     private float aspectRatio = 0;
     private boolean adjustWidth;
     private OnSizeChangedListener onSizeChangedListener;
 
-    public RatioImageView(Context context) {
+    public RatioFrameLayout(Context context) {
         super(context);
         init(null);
     }
 
-    public RatioImageView(Context context, AttributeSet attrs) {
+    public RatioFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public RatioImageView(Context context, AttributeSet attrs, int defStyle) {
+    public RatioFrameLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
     }
@@ -80,8 +82,7 @@ public class RatioImageView extends ImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
-//        if (aspectRatio > 0) {//&& (widthSpecMode == MeasureSpec.AT_MOST || widthSpecMode == MeasureSpec.EXACTLY)) {
-        if (aspectRatio > 0 && (widthSpecMode == MeasureSpec.AT_MOST || widthSpecMode == MeasureSpec.EXACTLY)) {
+        if (aspectRatio > 0) {//&& (widthSpecMode == MeasureSpec.AT_MOST || widthSpecMode == MeasureSpec.EXACTLY)) {
             int widthSize;
             int heightSize;
 
@@ -101,6 +102,23 @@ public class RatioImageView extends ImageView {
             } else {
                 widthSize = resolveSizeAndState(w, widthMeasureSpec, 0);
                 heightSize = (int) ((widthSize - pleft - pright) * aspectRatio) + ptop + pbottom;
+            }
+
+            int count = getChildCount();
+            for (int i = 0; i < count; i++) {
+                View element = getChildAt(i);
+                ViewGroup.LayoutParams p = element.getLayoutParams();
+                if (p == null) {
+                    p = new FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.MATCH_PARENT,
+                            FrameLayout.LayoutParams.MATCH_PARENT);
+                }
+
+                int childHeightSpec = ViewGroup.getChildMeasureSpec(heightMeasureSpec,
+                        ptop + pbottom, p.height);
+                int childWidthSpec = ViewGroup.getChildMeasureSpec(widthMeasureSpec,
+                        pleft + pright, p.width);
+                element.measure(childWidthSpec, childHeightSpec);
             }
 
             setMeasuredDimension(widthSize, heightSize);

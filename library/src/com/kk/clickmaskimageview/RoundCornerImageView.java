@@ -26,11 +26,12 @@ import android.widget.ImageView;
  * Created by xj on 13-8-26.
  */
 public class RoundCornerImageView extends ImageView {
-    private static final float DEFAULT_RADIUS_X = 5f;
-    private static final float DEFAULT_RADIUS_Y = 5f;
+    private static final float DEFAULT_RADIUS_X = 0f;
+    private static final float DEFAULT_RADIUS_Y = 0f;
 
     private float mRadiusX = DEFAULT_RADIUS_X;
     private float mRadiusY = DEFAULT_RADIUS_Y;
+    private boolean mIsRound = false;
     protected Paint mBitmapPaint;
     protected Paint mBackgroundColorPaint;
     BitmapShader mBitmapShader;
@@ -55,12 +56,13 @@ public class RoundCornerImageView extends ImageView {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RoundCornerImageView);
             mBackgroundColor = a.getColor(R.styleable.RoundCornerImageView_background, 0);
-            mRadiusX = a.getDimension(R.styleable.RoundCornerImageView_radiusx, DEFAULT_RADIUS_X);
-            mRadiusY = a.getDimension(R.styleable.RoundCornerImageView_radiusy, DEFAULT_RADIUS_Y);
-            float radius = a.getDimension(R.styleable.RoundCornerImageView_radiusxy, -1);
+            mRadiusX = a.getDimension(R.styleable.RoundCornerImageView_radiusX, DEFAULT_RADIUS_X);
+            mRadiusY = a.getDimension(R.styleable.RoundCornerImageView_radiusY, DEFAULT_RADIUS_Y);
+            float radius = a.getDimension(R.styleable.RoundCornerImageView_radiusXY, -1);
             if (radius != -1) {
                 mRadiusX = mRadiusY = radius;
             }
+            mIsRound = a.getBoolean(R.styleable.RoundCornerImageView_isRound, false);
         }
         getBitmapPaint();
         getBackgroundColorPaint().setColor(mBackgroundColor);
@@ -101,6 +103,14 @@ public class RoundCornerImageView extends ImageView {
             this.mRadiusX = this.mRadiusY = radius;
             invalidate();
         }
+    }
+
+    public void setIsRound(boolean isRound) {
+        this.mIsRound = isRound;
+    }
+
+    public boolean isRound() {
+        return mIsRound;
     }
 
     @Override
@@ -201,7 +211,11 @@ public class RoundCornerImageView extends ImageView {
                 // radius is the radius in pixels of the rounded corners
                 // paint contains the shader that will texture the shape
                 RectF rect = new RectF(0, 0, dwidth, dheight);
-                canvas.drawRoundRect(rect, mRadiusX / scale, mRadiusY / scale, getBitmapPaint());
+                if (isRound()) {
+                    canvas.drawRoundRect(rect, vwidth / 2, vheight / 2, getBitmapPaint());
+                } else {
+                    canvas.drawRoundRect(rect, mRadiusX, mRadiusY, getBitmapPaint());
+                }
                 canvas.restoreToCount(saveCount);
 
                 // draw border
@@ -219,7 +233,11 @@ public class RoundCornerImageView extends ImageView {
             if (mBackgroundColor != 0) {
                 if (vwidth > 0 && vheight > 0) {
                     RectF rect = new RectF(getPaddingLeft(), getPaddingTop(), getWidth(), getHeight());
-                    canvas.drawRoundRect(rect, mRadiusX, mRadiusY, getBackgroundColorPaint());
+                    if (isRound()) {
+                        canvas.drawRoundRect(rect, vwidth / 2, vheight / 2, getBackgroundColorPaint());
+                    } else {
+                        canvas.drawRoundRect(rect, mRadiusX, mRadiusY, getBackgroundColorPaint());
+                    }
                 }
             }
         }

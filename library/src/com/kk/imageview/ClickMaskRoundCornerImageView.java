@@ -1,4 +1,4 @@
-package com.kk.clickmaskimageview;
+package com.kk.imageview;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

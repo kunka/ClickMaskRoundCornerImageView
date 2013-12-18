@@ -1,4 +1,4 @@
-package com.kk.clickmaskimageviewdemo;
+package com.kk.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.kk.clickmaskimageview.RatioImageView;
+import com.kk.imageview.RatioImageView;
 
 import java.util.ArrayList;
 

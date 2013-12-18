@@ -1,63 +1,60 @@
-package com.kk.clickmaskimageview;
+package com.kk.imageview;
 
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
 
 /**
- * Implement click mask effect when the imageView is clicked and our onClickListener
+ * Add click mask effect when the imageView is clicked and implement our own onClickListener
  * <p/>
  * Created by xj on 13-8-27.
  */
-public class CustomOnClickListener implements View.OnTouchListener {
+@Deprecated
+public class ClickMaskImageViewTouchListener implements View.OnTouchListener {
     private static final String TAG = "ClickMaskImageView";
-
-    /**
-     * Interface definition for a callback to be invoked when a view is clicked.
-     */
-    public interface OnPressListener {
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        void onPress(View v, boolean press);
-    }
-
-    private boolean isOnClick;
-    private Runnable mClickedCallback;
-    private View.OnClickListener onClickListener;
-    private OnPressListener onPressListener;
+    //overlay is black with transparency of 0x77 (119)
+    private static final int MASK_COLOR = 0x77000000;
+    private int mTouchSlop;
+    private float mDownX;
+    private float mDownY;
+    private boolean isOnClick = false;
     private boolean isPressed = false;
-    private View mView;
+    private Runnable mClickedCallback;
+    private ImageView mImageView;
+    private View.OnClickListener onClickListener;
 
-    public CustomOnClickListener(View view) {
-        if (view == null) throw new NullPointerException();
-        this.mView = view;
+    public ClickMaskImageViewTouchListener(ImageView imageView) {
+        if (imageView == null) throw new NullPointerException();
+        this.mImageView = imageView;
+        ViewConfiguration vc = ViewConfiguration.get(imageView.getContext());
+        mTouchSlop = vc.getScaledTouchSlop();
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    public void setOnPressListener(OnPressListener onPressListener) {
-        this.onPressListener = onPressListener;
-    }
-
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_OUTSIDE:
-                android.util.Log.d(TAG, "ACTION_OUTSIDE");
+                Log.d(TAG, "ACTION_OUTSIDE");
+                removeTapCallback();
+                setPressedEffect(false);
+                break;
             case MotionEvent.ACTION_CANCEL:
-                android.util.Log.d(TAG, "ACTION_CANCEL");
+                Log.d(TAG, "ACTION_CANCEL");
                 removeTapCallback();
                 setPressedEffect(false);
                 break;
             case MotionEvent.ACTION_UP:
-                android.util.Log.d(TAG, "ACTION_UP");
+                Log.d(TAG, "ACTION_UP");
                 if (isOnClick) {
-                    mView.post(new Runnable() {
+                    mImageView.post(new Runnable() {
                         @Override
                         public void run() {
                             handleOnClick();
@@ -65,7 +62,7 @@ public class CustomOnClickListener implements View.OnTouchListener {
                     });
                     removeTapCallback();
                     setPressedEffect(true);
-                    mView.postDelayed(new Runnable() {
+                    mImageView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             setPressedEffect(false);
@@ -76,11 +73,13 @@ public class CustomOnClickListener implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_MOVE: {
                 // check is swiping
-                android.util.Log.d(TAG, "ACTION_MOVE");
+                Log.d(TAG, "ACTION_MOVE");
+//                float deltaX = motionEvent.getRawX() - mDownX;
+//                float deltaY = motionEvent.getRawY() - mDownY;
 
                 // check whether cancel on click
                 if (isOnClick && !isPointInsideView(motionEvent.getRawX(), motionEvent.getRawY(), view)) {
-                    android.util.Log.d(TAG, "cancel onCLick");
+                    Log.d(TAG, "cancel onCLick");
                     removeTapCallback();
                     setPressedEffect(false);
                     return false;
@@ -88,7 +87,9 @@ public class CustomOnClickListener implements View.OnTouchListener {
                 break;
             }
             case MotionEvent.ACTION_DOWN: {
-                android.util.Log.d(TAG, "ACTION_DOWN");
+                Log.d(TAG, "ACTION_DOWN");
+                mDownX = motionEvent.getRawX();
+                mDownY = motionEvent.getRawY();
                 isOnClick = true;
                 mClickedCallback = new Runnable() {
                     @Override
@@ -98,13 +99,12 @@ public class CustomOnClickListener implements View.OnTouchListener {
                         }
                     }
                 };
-                mView.postDelayed(mClickedCallback, ViewConfiguration.getTapTimeout());
+                mImageView.postDelayed(mClickedCallback, ViewConfiguration.getTapTimeout());
                 return true;
             }
         }
 
-//        return true;
-        return mView.onTouchEvent(motionEvent);
+        return mImageView.onTouchEvent(motionEvent);
     }
 
     /**
@@ -131,26 +131,29 @@ public class CustomOnClickListener implements View.OnTouchListener {
     }
 
     private void handleOnClick() {
-        android.util.Log.d(TAG, "handleOnClick ");
+        Log.d(TAG, "handleOnClick ");
         if (onClickListener != null)
-            onClickListener.onClick(mView);
+            onClickListener.onClick(mImageView);
     }
 
     private void setPressedEffect(boolean pressed) {
         if (isPressed != pressed) {
-            android.util.Log.d(TAG, "setPressedEffect " + pressed);
+            Log.d(TAG, "setPressedEffect " + pressed);
             isPressed = pressed;
-            if (onPressListener != null)
-                onPressListener.onPress(mView, isPressed);
+            if (isPressed)
+                mImageView.setColorFilter(new PorterDuffColorFilter(MASK_COLOR, PorterDuff.Mode.SRC_ATOP));
+            else
+                mImageView.setColorFilter(null);
         }
     }
 
     private void removeTapCallback() {
         if (mClickedCallback != null) {
-            android.util.Log.d(TAG, "removeCallbacks");
-            mView.removeCallbacks(mClickedCallback);
+            Log.d(TAG, "removeCallbacks");
+            mImageView.removeCallbacks(mClickedCallback);
             mClickedCallback = null;
         }
         isOnClick = false;
     }
+
 }

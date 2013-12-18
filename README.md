@@ -3,16 +3,20 @@ ClickMaskRoundCornerImageView
 
 Implement android's ClickMaskImageView and a lightweight RoundCornerImageView
 
+
 normal:
-![alt tag](http://i.imgur.com/hvhcgTf.png)
+
+![alt ](http://i.imgur.com/hvhcgTf.png?1)
 
 
 clicked:
-![alt tag](http://i.imgur.com/psTAazB.png)
+
+![alt ](http://i.imgur.com/psTAazB.png?1)
 
 
 RatioImageView
 =============================
 
 RatioImageView:
-![alt tag](http://i.imgur.com/hiVqHm6.jpg)
+
+![alt ](http://i.imgur.com/hiVqHm6.jpg?1)
